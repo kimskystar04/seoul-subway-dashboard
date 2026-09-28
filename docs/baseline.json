@@ -1,0 +1,24 @@
+{
+  "dataset": {
+    "file_name": "CARD_SUBWAY_MONTH_202608.csv",
+    "sha256": "1db9c1b857136042125a7c2cf82b9525f96163344543d1f90f78d1a507f0ade4",
+    "date_start": "2026-08-01",
+    "date_end": "2026-08-31",
+    "weekday_definition": "Monday-Friday, public holidays not excluded"
+  },
+  "summary": {
+    "valid_rows": 19133,
+    "total_boardings": 208329561,
+    "total_alightings": 207340153,
+    "total_usage": 415669714,
+    "weekday_day_count": 21,
+    "weekend_day_count": 10,
+    "weekday_daily_average": 15030554.43,
+    "weekend_daily_average": 10002807.10
+  },
+  "top_stations_first3": [
+    { "station": "서울역", "total_usage": 7320176 },
+    { "station": "잠실(송파구청)", "total_usage": 6235288 },
+    { "station": "홍대입구", "total_usage": 5947048 }
+  ]
+}

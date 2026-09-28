@@ -1,0 +1,12 @@
+{
+  "name": "seoul-subway-dashboard",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Seoul subway ridership dashboard (static site, Python-preprocessed JSON)",
+  "scripts": {
+    "test": "node --test tests/"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}

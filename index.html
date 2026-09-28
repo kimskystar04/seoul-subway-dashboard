@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>서울 지하철 이용량 대시보드</title>
+  <meta name="description" content="서울 지하철 승하차 데이터를 날짜·노선으로 필터링해 보여주는 대시보드" />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <a class="skip-link" href="#main-content">본문으로 건너뛰기</a>
+
+  <header class="site-header">
+    <div class="header-inner">
+      <h1>서울 지하철 이용량 대시보드</h1>
+      <button id="theme-toggle" type="button" aria-pressed="false">🌙 다크 모드</button>
+    </div>
+  </header>
+
+  <main id="main-content">
+    <section class="filters" aria-labelledby="filters-heading">
+      <h2 id="filters-heading" class="visually-hidden">필터</h2>
+      <div class="filters-row">
+        <div class="field">
+          <label for="start-date">시작일</label>
+          <input type="date" id="start-date" name="start-date" />
+        </div>
+        <div class="field">
+          <label for="end-date">종료일</label>
+          <input type="date" id="end-date" name="end-date" />
+        </div>
+        <div class="field">
+          <label for="line-select">노선</label>
+          <select id="line-select" name="line-select">
+            <option value="ALL">전체 노선</option>
+          </select>
+        </div>
+        <button id="reset-filters" type="button">필터 초기화</button>
+      </div>
+      <p id="filter-message" role="alert" class="filter-message" hidden></p>
+    </section>
+
+    <p id="empty-state" class="empty-state" role="status" hidden>선택한 조건에 해당하는 데이터가 없습니다.</p>
+
+    <div id="dashboard-content">
+      <section class="kpi-grid" aria-labelledby="kpi-heading">
+        <h2 id="kpi-heading" class="visually-hidden">핵심 지표</h2>
+        <div class="kpi-card">
+          <span class="kpi-label">전체 승차</span>
+          <span class="kpi-value" id="kpi-boardings">0</span>
+        </div>
+        <div class="kpi-card">
+          <span class="kpi-label">전체 하차</span>
+          <span class="kpi-value" id="kpi-alightings">0</span>
+        </div>
+        <div class="kpi-card">
+          <span class="kpi-label">전체 이용량</span>
+          <span class="kpi-value" id="kpi-usage">0</span>
+        </div>
+        <div class="kpi-card">
+          <span class="kpi-label">평일 일평균</span>
+          <span class="kpi-value" id="kpi-weekday-avg">0</span>
+        </div>
+        <div class="kpi-card">
+          <span class="kpi-label">주말 일평균</span>
+          <span class="kpi-value" id="kpi-weekend-avg">0</span>
+        </div>
+      </section>
+
+      <section class="charts-grid" aria-labelledby="charts-heading">
+        <h2 id="charts-heading" class="visually-hidden">차트</h2>
+        <div class="chart-card">
+          <h3>이용객 상위 10개 역</h3>
+          <div class="chart-wrap"><canvas id="chart-top-stations" role="img" aria-label="이용객 상위 10개 역 막대 차트"></canvas></div>
+        </div>
+        <div class="chart-card">
+          <h3>노선별 이용량</h3>
+          <div class="chart-wrap"><canvas id="chart-line-usage" role="img" aria-label="노선별 이용량 막대 차트"></canvas></div>
+        </div>
+        <div class="chart-card chart-card--wide">
+          <h3>날짜별 이용량 추이</h3>
+          <div class="chart-wrap"><canvas id="chart-daily-usage" role="img" aria-label="날짜별 이용량 추이 꺾은선 차트"></canvas></div>
+        </div>
+      </section>
+
+      <section class="table-section" aria-labelledby="table-heading">
+        <h2 id="table-heading">상세 데이터</h2>
+        <p id="detail-table-note" class="table-note"></p>
+        <div class="table-scroll">
+          <table>
+            <thead>
+              <tr>
+                <th scope="col">날짜</th>
+                <th scope="col">노선</th>
+                <th scope="col">역명</th>
+                <th scope="col">승차</th>
+                <th scope="col">하차</th>
+                <th scope="col">전체 이용량</th>
+              </tr>
+            </thead>
+            <tbody id="detail-table-body"></tbody>
+          </table>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <p>데이터 출처: 서울 지하철 승하차 데이터 (2026년 8월) · Python·pandas로 사전 분석, 웹은 정적 JSON만 사용</p>
+  </footer>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.5.1/chart.umd.min.js"></script>
+  <script src="js/analysis.js"></script>
+  <script src="js/data.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
